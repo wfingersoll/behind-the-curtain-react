@@ -27,6 +27,8 @@ class IMDB:
         soup = BeautifulSoup(page.content, "html.parser")
         results = soup.find_all('td', class_="result_text")
 
+        re.sub("\(", "", results)
+        re.sub("\)")
         titles = re.findall("\/title\/([a-zA-z0-9]+)\/\"\>([\w\s:-]+)</a>[^\<]+\(([0-9]+)\)", str(results))
 
         title_dict = collections.defaultdict(str)
@@ -37,6 +39,7 @@ class IMDB:
                 title_dict[title[1]+" ("+title[2]+")"] = title[0]
 
         link = ''
+        print(str(title_dict))
         for key in title_dict.items():
             if (key[0].lower()) == self.movie:
                 link = key[1]
