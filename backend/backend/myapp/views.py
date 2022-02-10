@@ -20,8 +20,10 @@ class views():
         else:
             return render(request, 'myapp/form.html')
 
-    def movie(self, request, search_title):
+    def titles(self, request):
 
+        return render(request, 'myapp/movie.html')
+        
         im = IMDB(search_title)
         movie = im.get_movie_page()
         if(movie == '0'):

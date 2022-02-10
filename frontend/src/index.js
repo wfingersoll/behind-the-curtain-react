@@ -1,7 +1,7 @@
-import React from "react"
-import ReactDOM from "react-dom"
+import React from "react";
+import reactDom from "react-dom";
 
-const App = () => {
+const Index = () => {
     const [count, setCount] = React.useState(0)
     const onClick = () => setCount(c => c + 1)
     return (    
@@ -12,5 +12,5 @@ const App = () => {
     )
 }
 
-const root = document.getElementById('app')
-ReactDOM.render(React.createElement(App, null, null), root)
+const root = document.getElementById("index")
+reactDom.render(<Index />, root)

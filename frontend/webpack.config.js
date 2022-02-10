@@ -3,7 +3,9 @@ const webpack = require('webpack')
 module.exports = {
   // Where Webpack looks to load your JavaScript
   entry: {
-    main: path.resolve(__dirname, 'src/index.js'),
+    index: path.resolve(__dirname, 'src/index.js'),
+    search: path.resolve(__dirname, "src/search.js"),
+    titles: path.resolve(__dirname, 'src/titles.js'),
   },
   mode: 'development',
   module: {
@@ -18,7 +20,7 @@ module.exports = {
   // Where Webpack spits out the results (the myapp static folder)
   output: {
     path: path.resolve(__dirname, '../backend/backend/myapp/static/myapp/'),
-    filename: 'main.js',
+    filename: '[name].js',
   },
   plugins: [
     // Don't output new files if there is an error

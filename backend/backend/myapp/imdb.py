@@ -21,16 +21,18 @@ class IMDB:
             movie_plus += piece
             movie_plus += "+"
 
+        #Uri to search for movie
         full_uri = self.uri1 + movie_plus[:-1] + self.uri2
 
+        #Get the search page
         page = requests.get(full_uri)
         soup = BeautifulSoup(page.content, "html.parser")
         results = soup.find_all('td', class_="result_text")
 
-        re.sub("\(", "", results)
-        re.sub("\)")
+        #Get every title on the results
         titles = re.findall("\/title\/([a-zA-z0-9]+)\/\"\>([\w\s:-]+)</a>[^\<]+\(([0-9]+)\)", str(results))
 
+        #Create a dictionary containing title, year, and id
         title_dict = collections.defaultdict(str)
         for count, title in enumerate(titles):
             if(title[1]+" ("+title[2]+")" in title_dict.keys()):
@@ -38,15 +40,20 @@ class IMDB:
             else:
                 title_dict[title[1]+" ("+title[2]+")"] = title[0]
 
+        #Attempt to find a link to the searched movie by comparing the titles found 
+        #to the user's entered movie
         link = ''
-        print(str(title_dict))
         for key in title_dict.items():
-            if (key[0].lower()) == self.movie:
+            #Cleaning the key
+            clean_key = re.sub("\(","",key[0])
+            clean_key = re.sub("\)","",clean_key)
+            clean_key = clean_key.lower()
+            
+            #Returning the link to identified movie            
+            if (clean_key) == self.movie:
                 link = key[1]
                 return "https://www.imdb.com/title/" + link + "/?ref_=fn_al_tt_1"
-            elif (key[0].lower())[:-6] == self.movie:
-                link = key[1]
-                return "https://www.imdb.com/title/" + link + "/?ref_=fn_al_tt_1"
+        #If no results match the search return the first result
         try:
             link = list(title_dict.items())[0]
             return "https://www.imdb.com/title/" + link[1] + "/?ref_=fn_al_tt_1"

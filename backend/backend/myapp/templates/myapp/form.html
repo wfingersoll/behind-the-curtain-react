@@ -1,6 +1,15 @@
-<form method="POST" action="">
-{% csrf_token %}
-<input type="text" name="textfield">
+{% load static %}
 
-<button type="submit">Upload text</button>
-</form>
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/styles.css' %}" />
+</head>
+
+<body>
+    <div id="search">
+        <h1>Loading...</h1>
+    </div>
+    <script src="{% static 'myapp/search.js' %}"></script>
+</body>
+</html>

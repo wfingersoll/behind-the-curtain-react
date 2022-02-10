@@ -1,53 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+{% load static %}
+
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Behind The Curtain - {{ title }}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'myapp/styles.css' %}" />
 </head>
+
 <body>
-
-<h1>Search For Movies:</h1>
-<form method="POST" action="">
-{% csrf_token %}
-<input type="text" name="textfield">
-
-<button type="submit">Upload text</button>
-</form>
-
-<h1>
-    Behind The Curtain On...<br>
-</h1>
-<h1 style="text-indent:75px;">
-    {{title}}
-</h1>
-<h2>
-    Top Cast:
-</h2>
-<p>
-<ul>
-    {% for member in cast %}
-        <li><a href="/search/{{ member }}">{{member}}</a></li>
-    {% endfor %}
-</ul>
-</p>
-<h2>
-    Top Crew:
-</h2>
-<p>
-<ul>
-    {% for key, value in crew.items %}
-    <li>
-        {{key}}:
-        <ul>
-        {% for member in value %}
-            <li>{{member}}</li>
-        {% endfor %}
-        </ul>
-    </li>
-    {% endfor %}
-</ul>
-</p>
-
-
+    <div id="title">
+        <h1>Loading...</h1>
+    </div>
+    <script src="{% static 'myapp/titles.js' %}"></script>
 </body>
 </html>

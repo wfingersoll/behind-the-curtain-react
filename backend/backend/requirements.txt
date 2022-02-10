@@ -1,1 +1,43 @@
 django
+wikipedia
+bs4
+
+
+def titles(self, request):
+
+
+        
+        im = IMDB(search_title)
+        movie = im.get_movie_page()
+        if(movie == '0'):
+            return HttpResponseRedirect('')
+        title = im.get_title(movie)
+        crew = im.get_crew(movie)
+        cast = im.get_cast(movie)
+        special_credits = im.get_special_credits(movie)
+
+        context = {'title': title, 'crew': crew, 'cast': cast}
+
+        return render(request, 'myapp/movie.html', context)
+
+    def actor_and_company(self, request, name):
+
+        try:
+            wik = Wiki(name)
+        except:
+            return HttpResponseRedirect('')
+
+        if(wik.name) == 'no results found':
+            return HttpResponseRedirect('')
+
+        summary = wik.get_summary()
+        agenda = wik.get_agenda()
+        views = wik.get_views()
+        print(wik.page.url)
+
+        context = {'name': name,
+                'summary': summary,
+                'agenda': agenda,
+                    'views': views,
+                }
+        return render(request, 'myapp/actor_and_company.html', context)

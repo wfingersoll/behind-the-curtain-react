@@ -1,0 +1,22 @@
+version: "3.2"
+services:
+  backend:
+    restart: always
+    container_name: back
+    command: "python3 manage.py runserver"
+    build:
+      context: ./backend/backend/
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    
+  frontend:
+    restart: always
+    command: npm start
+    container_name: front
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    stdin_open: true  
